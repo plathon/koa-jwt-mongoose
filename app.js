@@ -42,4 +42,7 @@ app.use( jwt({ secret: config.secret }) );
 
 //auth user routes
 
-app.listen(3001);
+if (env != 'test')
+  module.exports = app.listen(3001);
+else
+  app.listen(3001);
