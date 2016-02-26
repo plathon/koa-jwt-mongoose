@@ -1,6 +1,6 @@
-var bcrypt   = require('co-bcrypt');
-var jwt      = require('jsonwebtoken');
-var config   = require('../config');
+var bcrypt    = require('co-bcrypt');
+var jwt       = require('jsonwebtoken');
+var config    = require('../config');
 var UserModel = require('../models/user');
 
 /**
@@ -24,8 +24,7 @@ module.exports.auth = function *(){
         //response
         this.body = {
           msg: 'Successfully logged in.',
-          token: token,
-          data: user.withoutPassword
+          token: token
         }
 
       } else
@@ -45,7 +44,7 @@ module.exports.auth = function *(){
 module.exports.create = function *() {
   try {
     var reqBody = this.request.body;
-    console.log(reqBody);
+
     var userExists = yield UserModel.findOne({email: reqBody.email});
 
     if ( userExists )
@@ -64,8 +63,7 @@ module.exports.create = function *() {
       //response
       this.body = {
         msg: 'User was successfully created.',
-        token: token,
-        data: user.withoutPassword
+        token: token
       }
 
   } catch (err) {

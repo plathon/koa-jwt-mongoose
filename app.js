@@ -17,7 +17,8 @@ if (env != 'test') app.use(logger())
 app.use(bodyParser());
 app.use(cors());
 
-var users = require('./resources/users');
+var users    = require('./resources/users');
+var articles = require('./resources/articles');
 
 //jwt auth config middleware
 app.use(function *(next){
@@ -41,6 +42,8 @@ app.use(route.post('/signup', users.create));
 app.use( jwt({ secret: config.secret }) );
 
 //auth user routes
+app.use(route.get('/articles', articles.index));
+app.use(route.post('/articles', articles.create));
 
 if (env != 'test')
   module.exports = app.listen(3001);
