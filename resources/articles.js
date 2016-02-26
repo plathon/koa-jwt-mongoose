@@ -15,7 +15,7 @@ module.exports.index = function *() {
     .limit(reqQuery.limit || 0)
     .sort({_id: -1})
     .exec(function (err, campaigns) {
-      if (err) this.throw( 'Não foi possível recuperar campanhas.' );
+      if (err) this.throw( 'cannot retrieve articles.' );
     });
     this.body = articles;
 
